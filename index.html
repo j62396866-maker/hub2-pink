@@ -6,263 +6,99 @@
     <title>Hub Musical - Pink Paradise</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:wght@400;600;700&display=swap');
-
         :root {
-            --coral: #ff6b6b;
-            --orange: #ff9f43;
-            --yellow: #ffd32a;
-            --teal: #00d2d3;
-            --green: #1dd1a1;
-            --purple: #c56cf0;
-            --dark: #1a1a2e;
-            --card: rgba(255,255,255,0.08);
-            --text: #fff;
+            --coral: #ff6b6b; --orange: #ff9f43; --yellow: #ffd32a;
+            --teal: #00d2d3; --green: #1dd1a1; --purple: #c56cf0;
+            --dark: #1a1a2e; --card: rgba(255,255,255,0.08); --text: #fff;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            min-height: 100vh;
-            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh; font-family: 'DM Sans', sans-serif;
             color: var(--text);
             background: linear-gradient(135deg, #0f3460 0%, #16213e 40%, #1a1a2e 100%);
             overflow-x: hidden;
         }
-
-        /* Animated tropical background */
         body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
+            content: ''; position: fixed; inset: 0;
             background:
                 radial-gradient(ellipse at 10% 20%, rgba(255,107,107,0.25) 0%, transparent 50%),
                 radial-gradient(ellipse at 90% 10%, rgba(255,159,67,0.2) 0%, transparent 45%),
                 radial-gradient(ellipse at 80% 80%, rgba(0,210,211,0.2) 0%, transparent 50%),
-                radial-gradient(ellipse at 20% 85%, rgba(29,209,161,0.2) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 50%, rgba(197,108,240,0.1) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-            animation: bgPulse 8s ease-in-out infinite alternate;
+                radial-gradient(ellipse at 20% 85%, rgba(29,209,161,0.2) 0%, transparent 45%);
+            pointer-events: none; z-index: 0;
         }
-
-        @keyframes bgPulse {
-            from { opacity: 0.8; }
-            to   { opacity: 1; }
-        }
-
         .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 30px 20px 60px; }
-
-        /* Header */
         header { text-align: center; margin-bottom: 32px; }
         header h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-family: 'Pacifico', cursive; font-size: clamp(1.8rem, 5vw, 2.5rem);
             background: linear-gradient(90deg, var(--coral), var(--orange), var(--yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 2px 8px rgba(255,107,107,0.4));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         header p { margin-top: 6px; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-
-        /* Login */
         #login-section { text-align: center; padding: 60px 20px; }
         #login-section p { margin-bottom: 24px; font-size: 1rem; color: rgba(255,255,255,0.7); }
         .btn-spotify {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
+            display: inline-flex; align-items: center; gap: 12px;
             background: linear-gradient(135deg, var(--green), var(--teal));
-            color: #fff;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 16px 36px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 8px 24px rgba(29,209,161,0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
+            color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem;
+            padding: 16px 36px; border-radius: 50px; border: none; cursor: pointer;
+            box-shadow: 0 8px 24px rgba(29,209,161,0.35); transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn-spotify:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(29,209,161,0.45); }
         .btn-spotify svg { width: 24px; height: 24px; fill: white; }
-
-        /* Cards */
         .card {
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 20px;
+            background: var(--card); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12); border-radius: 20px;
+            padding: 24px; margin-bottom: 20px;
         }
-        .card-title {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--orange);
-            margin-bottom: 18px;
-        }
-
-        /* User bar */
-        #user-bar {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 24px;
-        }
-        #user-bar img {
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--coral);
-            object-fit: cover;
-        }
+        .card-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; }
+        #user-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+        #user-bar img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--coral); object-fit: cover; }
         #user-bar .name { font-weight: 700; font-size: 1rem; }
         #user-bar .sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
         #logout-btn {
-            margin-left: auto;
-            background: rgba(255,107,107,0.2);
-            border: 1px solid rgba(255,107,107,0.4);
-            color: var(--coral);
-            padding: 7px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-family: 'DM Sans', sans-serif;
-            transition: background 0.2s;
+            margin-left: auto; background: rgba(255,107,107,0.2); border: 1px solid rgba(255,107,107,0.4);
+            color: var(--coral); padding: 7px 16px; border-radius: 20px; cursor: pointer;
+            font-size: 0.8rem; font-family: 'DM Sans', sans-serif; transition: background 0.2s;
         }
         #logout-btn:hover { background: rgba(255,107,107,0.35); }
-
-        /* Now Playing */
         #now-playing-card { border-color: rgba(29,209,161,0.3); }
-        .now-playing-inner {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        #np-art {
-            width: 80px; height: 80px;
-            border-radius: 12px;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            animation: artPulse 2s ease-in-out infinite;
-        }
-        @keyframes artPulse {
-            0%,100% { box-shadow: 0 6px 20px rgba(29,209,161,0.3); }
-            50%      { box-shadow: 0 6px 30px rgba(29,209,161,0.6); }
-        }
+        .now-playing-inner { display: flex; align-items: center; gap: 18px; }
+        #np-art { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
         #np-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
         #np-artist { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--green), var(--teal));
-            border-radius: 2px;
-            transition: width 1s linear;
-        }
+        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--teal)); border-radius: 2px; }
         #np-time { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 5px; }
         .not-playing { color: rgba(255,255,255,0.4); font-size: 0.9rem; text-align: center; padding: 10px 0; }
-
-        /* Top Items */
         .top-list { list-style: none; }
-        .top-list li {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
+        .top-list li { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
         .top-list li:last-child { border-bottom: none; }
-        .top-rank {
-            width: 24px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--orange);
-            text-align: center;
-            flex-shrink: 0;
-        }
-        .top-list img {
-            width: 42px; height: 42px;
-            border-radius: 8px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
+        .top-rank { width: 24px; font-size: 0.75rem; font-weight: 700; color: var(--orange); text-align: center; flex-shrink: 0; }
+        .top-list img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
         .top-list .artist-img { border-radius: 50%; }
         .top-name { font-size: 0.88rem; font-weight: 600; }
-        .top-sub  { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
-
-        /* Playlists */
-        .playlist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
-        }
-        .playlist-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            text-decoration: none;
-            color: var(--text);
-        }
+        .top-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+        .playlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .playlist-item { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; text-align: center; cursor: pointer; transition: background 0.2s, transform 0.2s; text-decoration: none; color: var(--text); }
         .playlist-item:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
         .playlist-item img { width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; margin-bottom: 8px; }
         .playlist-item .pl-name { font-size: 0.78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .playlist-item .pl-count { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
-
-        /* Time range tabs */
         .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-        .tab {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: transparent;
-            color: rgba(255,255,255,0.5);
-            font-family: 'DM Sans', sans-serif;
-            transition: all 0.2s;
-        }
-        .tab.active {
-            background: linear-gradient(135deg, var(--coral), var(--orange));
-            border-color: transparent;
-            color: #fff;
-        }
-
-        /* Loader */
+        .tab { padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+        .tab.active { background: linear-gradient(135deg, var(--coral), var(--orange)); border-color: transparent; color: #fff; }
         .loader { text-align: center; padding: 20px; color: rgba(255,255,255,0.3); font-size: 0.85rem; }
-
-        /* Tropical deco */
-        .deco {
-            position: fixed;
-            font-size: 4rem;
-            opacity: 0.06;
-            pointer-events: none;
-            z-index: 0;
-            user-select: none;
-        }
-        .deco-1 { top: 5%;  left: 2%;  transform: rotate(-20deg); font-size: 5rem; }
+        .deco { position: fixed; font-size: 4rem; opacity: 0.06; pointer-events: none; z-index: 0; user-select: none; }
+        .deco-1 { top: 5%; left: 2%; transform: rotate(-20deg); font-size: 5rem; }
         .deco-2 { top: 15%; right: 3%; transform: rotate(15deg); }
         .deco-3 { bottom: 20%; left: 5%; transform: rotate(10deg); font-size: 6rem; }
         .deco-4 { bottom: 10%; right: 4%; transform: rotate(-10deg); font-size: 3rem; }
-
         #app { display: none; }
+        #debug { position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #0f0; font-size: 0.7rem; padding: 8px; border-radius: 8px; max-width: 300px; word-break: break-all; z-index: 999; display: none; }
     </style>
 </head>
 <body>
-
 <span class="deco deco-1">🌴</span>
 <span class="deco deco-2">🌺</span>
 <span class="deco deco-3">🦜</span>
@@ -274,7 +110,6 @@
         <p>Ton espace musical tropical</p>
     </header>
 
-    <!-- LOGIN -->
     <div id="login-section">
         <p>Connecte-toi avec Spotify pour accéder à ton hub musical 🎵</p>
         <button class="btn-spotify" onclick="login()">
@@ -283,9 +118,7 @@
         </button>
     </div>
 
-    <!-- APP -->
     <div id="app">
-        <!-- User -->
         <div id="user-bar">
             <img id="user-img" src="" alt="avatar">
             <div>
@@ -294,14 +127,10 @@
             </div>
             <button id="logout-btn" onclick="logout()">Déconnexion</button>
         </div>
-
-        <!-- Now Playing -->
         <div class="card" id="now-playing-card">
             <div class="card-title">🎵 En cours de lecture</div>
             <div id="now-playing-content"><div class="loader">Chargement...</div></div>
         </div>
-
-        <!-- Top Tracks -->
         <div class="card">
             <div class="card-title">🔥 Top Titres</div>
             <div class="tabs" id="tracks-tabs">
@@ -311,8 +140,6 @@
             </div>
             <ul class="top-list" id="top-tracks"><li class="loader">Chargement...</li></ul>
         </div>
-
-        <!-- Top Artists -->
         <div class="card">
             <div class="card-title">🌟 Top Artistes</div>
             <div class="tabs" id="artists-tabs">
@@ -322,8 +149,6 @@
             </div>
             <ul class="top-list" id="top-artists"><li class="loader">Chargement...</li></ul>
         </div>
-
-        <!-- Playlists -->
         <div class="card">
             <div class="card-title">🎧 Mes Playlists</div>
             <div class="playlist-grid" id="playlists"><div class="loader">Chargement...</div></div>
@@ -331,15 +156,20 @@
     </div>
 </div>
 
+<div id="debug"></div>
+
 <script>
 const CLIENT_ID = 'ca2cb2bb2d344cee8020f33f6780ef8e';
-const REDIRECT_URI = 'https://hub2.pinkmail.abrdns.com';
+const REDIRECT_URI = 'https://hub2.pinkmail.abrdns.com/';
 const SCOPES = 'user-read-currently-playing user-top-read playlist-read-private user-read-private user-read-email';
 
 let accessToken = null;
 let npInterval = null;
 
-// ── Auth PKCE ──────────────────────────────────────────────
+function dbg(msg) {
+    // décommente pour débugger : document.getElementById('debug').style.display='block'; document.getElementById('debug').textContent += msg + '\n';
+}
+
 function generateCodeVerifier(length = 128) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
     let result = '';
@@ -359,7 +189,8 @@ async function generateCodeChallenge(verifier) {
 async function login() {
     const verifier = generateCodeVerifier();
     const challenge = await generateCodeChallenge(verifier);
-    sessionStorage.setItem('pkce_verifier', verifier);
+    // localStorage au lieu de sessionStorage pour survivre à la redirection
+    localStorage.setItem('pkce_verifier', verifier);
     const url = new URL('https://accounts.spotify.com/authorize');
     url.searchParams.set('client_id', CLIENT_ID);
     url.searchParams.set('response_type', 'code');
@@ -371,7 +202,10 @@ async function login() {
 }
 
 async function handleCallback(code) {
-    const verifier = sessionStorage.getItem('pkce_verifier');
+    const verifier = localStorage.getItem('pkce_verifier');
+    dbg('verifier: ' + (verifier ? verifier.substring(0,20)+'...' : 'NULL'));
+    if (!verifier) { dbg('ERROR: no verifier'); return; }
+
     const res = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -384,8 +218,11 @@ async function handleCallback(code) {
         })
     });
     const data = await res.json();
+    dbg('token response: ' + JSON.stringify(data).substring(0,100));
+
     if (data.access_token) {
         accessToken = data.access_token;
+        localStorage.removeItem('pkce_verifier');
         localStorage.setItem('sp_token', accessToken);
         localStorage.setItem('sp_token_ts', Date.now());
         localStorage.setItem('sp_token_exp', data.expires_in * 1000);
@@ -398,13 +235,13 @@ function logout() {
     localStorage.removeItem('sp_token');
     localStorage.removeItem('sp_token_ts');
     localStorage.removeItem('sp_token_exp');
+    localStorage.removeItem('pkce_verifier');
     accessToken = null;
     clearInterval(npInterval);
     document.getElementById('login-section').style.display = 'block';
     document.getElementById('app').style.display = 'none';
 }
 
-// ── API ────────────────────────────────────────────────────
 async function api(endpoint) {
     const res = await fetch('https://api.spotify.com/v1' + endpoint, {
         headers: { Authorization: 'Bearer ' + accessToken }
@@ -414,7 +251,6 @@ async function api(endpoint) {
     return res.json();
 }
 
-// ── UI ─────────────────────────────────────────────────────
 async function showApp() {
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('app').style.display = 'block';
@@ -432,17 +268,13 @@ async function loadUser() {
     document.getElementById('user-name').textContent = data.display_name || data.id;
     document.getElementById('user-plan').textContent = data.product === 'premium' ? '✨ Premium' : '🎵 Free';
     const img = data.images?.[0]?.url;
-    if (img) document.getElementById('user-img').src = img;
-    else document.getElementById('user-img').src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.display_name || '?') + '&background=ff6b6b&color=fff';
+    document.getElementById('user-img').src = img || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.display_name || '?') + '&background=ff6b6b&color=fff';
 }
 
 async function loadNowPlaying() {
     const data = await api('/me/player/currently-playing');
     const el = document.getElementById('now-playing-content');
-    if (!data || !data.item) {
-        el.innerHTML = '<div class="not-playing">🎵 Aucune musique en cours...</div>';
-        return;
-    }
+    if (!data || !data.item) { el.innerHTML = '<div class="not-playing">🎵 Aucune musique en cours...</div>'; return; }
     const item = data.item;
     const art = item.album?.images?.[0]?.url || '';
     const title = item.name;
@@ -451,16 +283,15 @@ async function loadNowPlaying() {
     const duration = item.duration_ms || 1;
     const pct = Math.round((progress / duration) * 100);
     const fmt = ms => `${Math.floor(ms/60000)}:${String(Math.floor((ms%60000)/1000)).padStart(2,'0')}`;
-    el.innerHTML = `
-        <div class="now-playing-inner">
-            <img id="np-art" src="${art}" alt="cover">
-            <div style="flex:1;min-width:0">
-                <div id="np-title">${title}</div>
-                <div id="np-artist">${artist}</div>
-                <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-                <div id="np-time">${fmt(progress)} / ${fmt(duration)}</div>
-            </div>
-        </div>`;
+    el.innerHTML = `<div class="now-playing-inner">
+        <img id="np-art" src="${art}" alt="cover">
+        <div style="flex:1;min-width:0">
+            <div id="np-title">${title}</div>
+            <div id="np-artist">${artist}</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+            <div id="np-time">${fmt(progress)} / ${fmt(duration)}</div>
+        </div>
+    </div>`;
 }
 
 async function loadTopTracks(range, btn) {
@@ -469,15 +300,11 @@ async function loadTopTracks(range, btn) {
     el.innerHTML = '<li class="loader">Chargement...</li>';
     const data = await api(`/me/top/tracks?limit=10&time_range=${range}`);
     if (!data?.items?.length) { el.innerHTML = '<li class="loader">Aucun résultat</li>'; return; }
-    el.innerHTML = data.items.map((t, i) => `
-        <li>
-            <span class="top-rank">${i+1}</span>
-            <img src="${t.album?.images?.[2]?.url || t.album?.images?.[0]?.url || ''}" alt="">
-            <div>
-                <div class="top-name">${t.name}</div>
-                <div class="top-sub">${t.artists.map(a=>a.name).join(', ')}</div>
-            </div>
-        </li>`).join('');
+    el.innerHTML = data.items.map((t, i) => `<li>
+        <span class="top-rank">${i+1}</span>
+        <img src="${t.album?.images?.[2]?.url || t.album?.images?.[0]?.url || ''}" alt="">
+        <div><div class="top-name">${t.name}</div><div class="top-sub">${t.artists.map(a=>a.name).join(', ')}</div></div>
+    </li>`).join('');
 }
 
 async function loadTopArtists(range, btn) {
@@ -486,15 +313,11 @@ async function loadTopArtists(range, btn) {
     el.innerHTML = '<li class="loader">Chargement...</li>';
     const data = await api(`/me/top/artists?limit=10&time_range=${range}`);
     if (!data?.items?.length) { el.innerHTML = '<li class="loader">Aucun résultat</li>'; return; }
-    el.innerHTML = data.items.map((a, i) => `
-        <li>
-            <span class="top-rank">${i+1}</span>
-            <img class="artist-img" src="${a.images?.[2]?.url || a.images?.[0]?.url || ''}" alt="">
-            <div>
-                <div class="top-name">${a.name}</div>
-                <div class="top-sub">${a.genres?.slice(0,2).join(', ') || ''}</div>
-            </div>
-        </li>`).join('');
+    el.innerHTML = data.items.map((a, i) => `<li>
+        <span class="top-rank">${i+1}</span>
+        <img class="artist-img" src="${a.images?.[2]?.url || a.images?.[0]?.url || ''}" alt="">
+        <div><div class="top-name">${a.name}</div><div class="top-sub">${a.genres?.slice(0,2).join(', ') || ''}</div></div>
+    </li>`).join('');
 }
 
 async function loadPlaylists() {
@@ -503,7 +326,7 @@ async function loadPlaylists() {
     if (!data?.items?.length) { el.innerHTML = '<div class="loader">Aucune playlist</div>'; return; }
     el.innerHTML = data.items.map(p => `
         <a class="playlist-item" href="${p.external_urls?.spotify}" target="_blank">
-            <img src="${p.images?.[0]?.url || 'https://via.placeholder.com/130x130/1a1a2e/ff6b6b?text=🎵'}" alt="">
+            <img src="${p.images?.[0]?.url || ''}" alt="">
             <div class="pl-name">${p.name}</div>
             <div class="pl-count">${p.tracks?.total || 0} titres</div>
         </a>`).join('');
@@ -515,7 +338,6 @@ function setActiveTab(btn) {
     btn.classList.add('active');
 }
 
-// ── Init ───────────────────────────────────────────────────
 (async () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
