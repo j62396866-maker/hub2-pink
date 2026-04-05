@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Musical - Pink Paradise</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:wght@400;600;700&display=swap');
+
+        :root {
+            --coral: #ff6b6b;
+            --orange: #ff9f43;
+            --yellow: #ffd32a;
+            --teal: #00d2d3;
+            --green: #1dd1a1;
+            --purple: #c56cf0;
+            --dark: #1a1a2e;
+            --card: rgba(255,255,255,0.08);
+            --text: #fff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 40%, #1a1a2e 100%);
+            overflow-x: hidden;
+        }
+
+        /* Animated tropical background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(255,107,107,0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 10%, rgba(255,159,67,0.2) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,210,211,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 85%, rgba(29,209,161,0.2) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(197,108,240,0.1) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            from { opacity: 0.8; }
+            to   { opacity: 1; }
+        }
+
+        .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        /* Header */
+        header { text-align: center; margin-bottom: 32px; }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            background: linear-gradient(90deg, var(--coral), var(--orange), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(255,107,107,0.4));
+        }
+        header p { margin-top: 6px; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+        /* Login */
+        #login-section { text-align: center; padding: 60px 20px; }
+        #login-section p { margin-bottom: 24px; font-size: 1rem; color: rgba(255,255,255,0.7); }
+        .btn-spotify {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--green), var(--teal));
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 16px 36px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(29,209,161,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-spotify:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(29,209,161,0.45); }
+        .btn-spotify svg { width: 24px; height: 24px; fill: white; }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 18px;
+        }
+
+        /* User bar */
+        #user-bar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        #user-bar img {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--coral);
+            object-fit: cover;
+        }
+        #user-bar .name { font-weight: 700; font-size: 1rem; }
+        #user-bar .sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+        #logout-btn {
+            margin-left: auto;
+            background: rgba(255,107,107,0.2);
+            border: 1px solid rgba(255,107,107,0.4);
+            color: var(--coral);
+            padding: 7px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.2s;
+        }
+        #logout-btn:hover { background: rgba(255,107,107,0.35); }
+
+        /* Now Playing */
+        #now-playing-card { border-color: rgba(29,209,161,0.3); }
+        .now-playing-inner {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        #np-art {
+            width: 80px; height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            animation: artPulse 2s ease-in-out infinite;
+        }
+        @keyframes artPulse {
+            0%,100% { box-shadow: 0 6px 20px rgba(29,209,161,0.3); }
+            50%      { box-shadow: 0 6px 30px rgba(29,209,161,0.6); }
+        }
+        #np-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+        #np-artist { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), var(--teal));
+            border-radius: 2px;
+            transition: width 1s linear;
+        }
+        #np-time { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 5px; }
+        .not-playing { color: rgba(255,255,255,0.4); font-size: 0.9rem; text-align: center; padding: 10px 0; }
+
+        /* Top Items */
+        .top-list { list-style: none; }
+        .top-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .top-list li:last-child { border-bottom: none; }
+        .top-rank {
+            width: 24px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .top-list img {
+            width: 42px; height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .top-list .artist-img { border-radius: 50%; }
+        .top-name { font-size: 0.88rem; font-weight: 600; }
+        .top-sub  { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+        /* Playlists */
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+        .playlist-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .playlist-item:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+        .playlist-item img { width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; margin-bottom: 8px; }
+        .playlist-item .pl-name { font-size: 0.78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .playlist-item .pl-count { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+        /* Time range tabs */
+        .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+        .tab {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, var(--coral), var(--orange));
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Loader */
+        .loader { text-align: center; padding: 20px; color: rgba(255,255,255,0.3); font-size: 0.85rem; }
+
+        /* Tropical deco */
+        .deco {
+            position: fixed;
+            font-size: 4rem;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+        }
+        .deco-1 { top: 5%;  left: 2%;  transform: rotate(-20deg); font-size: 5rem; }
+        .deco-2 { top: 15%; right: 3%; transform: rotate(15deg); }
+        .deco-3 { bottom: 20%; left: 5%; transform: rotate(10deg); font-size: 6rem; }
+        .deco-4 { bottom: 10%; right: 4%; transform: rotate(-10deg); font-size: 3rem; }
+
+        #app { display: none; }
+    </style>
+</head>
+<body>
+
+<span class="deco deco-1">🌴</span>
+<span class="deco deco-2">🌺</span>
+<span class="deco deco-3">🦜</span>
+<span class="deco deco-4">🍍</span>
+
+<div class="page">
+    <header>
+        <h1>🌴 Hub Musical Pink Paradise 🌺</h1>
+        <p>Ton espace musical tropical</p>
+    </header>
+
+    <!-- LOGIN -->
+    <div id="login-section">
+        <p>Connecte-toi avec Spotify pour accéder à ton hub musical 🎵</p>
+        <button class="btn-spotify" onclick="login()">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Se connecter avec Spotify
+        </button>
+    </div>
+
+    <!-- APP -->
+    <div id="app">
+        <!-- User -->
+        <div id="user-bar">
+            <img id="user-img" src="" alt="avatar">
+            <div>
+                <div class="name" id="user-name">—</div>
+                <div class="sub" id="user-plan">—</div>
+            </div>
+            <button id="logout-btn" onclick="logout()">Déconnexion</button>
+        </div>
+
+        <!-- Now Playing -->
+        <div class="card" id="now-playing-card">
+            <div class="card-title">🎵 En cours de lecture</div>
+            <div id="now-playing-content"><div class="loader">Chargement...</div></div>
+        </div>
+
+        <!-- Top Tracks -->
+        <div class="card">
+            <div class="card-title">🔥 Top Titres</div>
+            <div class="tabs" id="tracks-tabs">
+                <button class="tab active" onclick="loadTopTracks('short_term',this)">4 semaines</button>
+                <button class="tab" onclick="loadTopTracks('medium_term',this)">6 mois</button>
+                <button class="tab" onclick="loadTopTracks('long_term',this)">Tout temps</button>
+            </div>
+            <ul class="top-list" id="top-tracks"><li class="loader">Chargement...</li></ul>
+        </div>
+
+        <!-- Top Artists -->
+        <div class="card">
+            <div class="card-title">🌟 Top Artistes</div>
+            <div class="tabs" id="artists-tabs">
+                <button class="tab active" onclick="loadTopArtists('short_term',this)">4 semaines</button>
+                <button class="tab" onclick="loadTopArtists('medium_term',this)">6 mois</button>
+                <button class="tab" onclick="loadTopArtists('long_term',this)">Tout temps</button>
+            </div>
+            <ul class="top-list" id="top-artists"><li class="loader">Chargement...</li></ul>
+        </div>
+
+        <!-- Playlists -->
+        <div class="card">
+            <div class="card-title">🎧 Mes Playlists</div>
+            <div class="playlist-grid" id="playlists"><div class="loader">Chargement...</div></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const CLIENT_ID = 'ca2cb2bb2d344cee8020f33f6780ef8e';
+const REDIRECT_URI = 'https://hub2.pinkmail.abrdns.com/callback';
+const SCOPES = 'user-read-currently-playing user-top-read playlist-read-private user-read-private user-read-email';
+
+let accessToken = null;
+let npInterval = null;
+
+// ── Auth PKCE ──────────────────────────────────────────────
+function generateCodeVerifier(length = 128) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+    let result = '';
+    const arr = new Uint8Array(length);
+    crypto.getRandomValues(arr);
+    arr.forEach(b => result += chars[b % chars.length]);
+    return result;
+}
+
+async function generateCodeChallenge(verifier) {
+    const data = new TextEncoder().encode(verifier);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
+async function login() {
+    const verifier = generateCodeVerifier();
+    const challenge = await generateCodeChallenge(verifier);
+    sessionStorage.setItem('pkce_verifier', verifier);
+    const url = new URL('https://accounts.spotify.com/authorize');
+    url.searchParams.set('client_id', CLIENT_ID);
+    url.searchParams.set('response_type', 'code');
+    url.searchParams.set('redirect_uri', REDIRECT_URI);
+    url.searchParams.set('scope', SCOPES);
+    url.searchParams.set('code_challenge_method', 'S256');
+    url.searchParams.set('code_challenge', challenge);
+    window.location = url.toString();
+}
+
+async function handleCallback(code) {
+    const verifier = sessionStorage.getItem('pkce_verifier');
+    const res = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            client_id: CLIENT_ID,
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri: REDIRECT_URI,
+            code_verifier: verifier
+        })
+    });
+    const data = await res.json();
+    if (data.access_token) {
+        accessToken = data.access_token;
+        localStorage.setItem('sp_token', accessToken);
+        localStorage.setItem('sp_token_ts', Date.now());
+        localStorage.setItem('sp_token_exp', data.expires_in * 1000);
+        window.history.replaceState({}, '', window.location.pathname);
+        showApp();
+    }
+}
+
+function logout() {
+    localStorage.removeItem('sp_token');
+    localStorage.removeItem('sp_token_ts');
+    localStorage.removeItem('sp_token_exp');
+    accessToken = null;
+    clearInterval(npInterval);
+    document.getElementById('login-section').style.display = 'block';
+    document.getElementById('app').style.display = 'none';
+}
+
+// ── API ────────────────────────────────────────────────────
+async function api(endpoint) {
+    const res = await fetch('https://api.spotify.com/v1' + endpoint, {
+        headers: { Authorization: 'Bearer ' + accessToken }
+    });
+    if (res.status === 204) return null;
+    if (!res.ok) return null;
+    return res.json();
+}
+
+// ── UI ─────────────────────────────────────────────────────
+async function showApp() {
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadUser();
+    loadNowPlaying();
+    loadTopTracks('short_term', document.querySelector('#tracks-tabs .tab'));
+    loadTopArtists('short_term', document.querySelector('#artists-tabs .tab'));
+    loadPlaylists();
+    npInterval = setInterval(loadNowPlaying, 30000);
+}
+
+async function loadUser() {
+    const data = await api('/me');
+    if (!data) return;
+    document.getElementById('user-name').textContent = data.display_name || data.id;
+    document.getElementById('user-plan').textContent = data.product === 'premium' ? '✨ Premium' : '🎵 Free';
+    const img = data.images?.[0]?.url;
+    if (img) document.getElementById('user-img').src = img;
+    else document.getElementById('user-img').src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.display_name || '?') + '&background=ff6b6b&color=fff';
+}
+
+async function loadNowPlaying() {
+    const data = await api('/me/player/currently-playing');
+    const el = document.getElementById('now-playing-content');
+    if (!data || !data.item) {
+        el.innerHTML = '<div class="not-playing">🎵 Aucune musique en cours...</div>';
+        return;
+    }
+    const item = data.item;
+    const art = item.album?.images?.[0]?.url || '';
+    const title = item.name;
+    const artist = item.artists?.map(a => a.name).join(', ');
+    const progress = data.progress_ms || 0;
+    const duration = item.duration_ms || 1;
+    const pct = Math.round((progress / duration) * 100);
+    const fmt = ms => `${Math.floor(ms/60000)}:${String(Math.floor((ms%60000)/1000)).padStart(2,'0')}`;
+    el.innerHTML = `
+        <div class="now-playing-inner">
+            <img id="np-art" src="${art}" alt="cover">
+            <div style="flex:1;min-width:0">
+                <div id="np-title">${title}</div>
+                <div id="np-artist">${artist}</div>
+                <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+                <div id="np-time">${fmt(progress)} / ${fmt(duration)}</div>
+            </div>
+        </div>`;
+}
+
+async function loadTopTracks(range, btn) {
+    setActiveTab(btn);
+    const el = document.getElementById('top-tracks');
+    el.innerHTML = '<li class="loader">Chargement...</li>';
+    const data = await api(`/me/top/tracks?limit=10&time_range=${range}`);
+    if (!data?.items?.length) { el.innerHTML = '<li class="loader">Aucun résultat</li>'; return; }
+    el.innerHTML = data.items.map((t, i) => `
+        <li>
+            <span class="top-rank">${i+1}</span>
+            <img src="${t.album?.images?.[2]?.url || t.album?.images?.[0]?.url || ''}" alt="">
+            <div>
+                <div class="top-name">${t.name}</div>
+                <div class="top-sub">${t.artists.map(a=>a.name).join(', ')}</div>
+            </div>
+        </li>`).join('');
+}
+
+async function loadTopArtists(range, btn) {
+    setActiveTab(btn);
+    const el = document.getElementById('top-artists');
+    el.innerHTML = '<li class="loader">Chargement...</li>';
+    const data = await api(`/me/top/artists?limit=10&time_range=${range}`);
+    if (!data?.items?.length) { el.innerHTML = '<li class="loader">Aucun résultat</li>'; return; }
+    el.innerHTML = data.items.map((a, i) => `
+        <li>
+            <span class="top-rank">${i+1}</span>
+            <img class="artist-img" src="${a.images?.[2]?.url || a.images?.[0]?.url || ''}" alt="">
+            <div>
+                <div class="top-name">${a.name}</div>
+                <div class="top-sub">${a.genres?.slice(0,2).join(', ') || ''}</div>
+            </div>
+        </li>`).join('');
+}
+
+async function loadPlaylists() {
+    const el = document.getElementById('playlists');
+    const data = await api('/me/playlists?limit=18');
+    if (!data?.items?.length) { el.innerHTML = '<div class="loader">Aucune playlist</div>'; return; }
+    el.innerHTML = data.items.map(p => `
+        <a class="playlist-item" href="${p.external_urls?.spotify}" target="_blank">
+            <img src="${p.images?.[0]?.url || 'https://via.placeholder.com/130x130/1a1a2e/ff6b6b?text=🎵'}" alt="">
+            <div class="pl-name">${p.name}</div>
+            <div class="pl-count">${p.tracks?.total || 0} titres</div>
+        </a>`).join('');
+}
+
+function setActiveTab(btn) {
+    if (!btn) return;
+    btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+// ── Init ───────────────────────────────────────────────────
+(async () => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) {
+        await handleCallback(code);
+        return;
+    }
+    const token = localStorage.getItem('sp_token');
+    const ts = parseInt(localStorage.getItem('sp_token_ts') || 0);
+    const exp = parseInt(localStorage.getItem('sp_token_exp') || 3600000);
+    if (token && Date.now() - ts < exp) {
+        accessToken = token;
+        showApp();
+    }
+})();
+</script>
+</body>
+</html>
